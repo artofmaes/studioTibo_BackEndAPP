@@ -112,9 +112,41 @@ easy_admin:
 
      Sections:
         class: App\Entity\Sections
+        label: 'Paginaonderdelen'
+        help: 'Maak/bekijk hier jouw paginaonderdelen'
+        form:
+          fields:
+            - {property: 'naam' , label: 'Naam onderdeel'}
+            - {property: 'pagina' , label: 'Op welke pagina?'}
+            - {property: 'h1_titel' , label: 'Hoofdtitel'}
+            - {property: 'userId' , label: 'Door wie?'}
+
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'naam' , label: 'Naam onderdeel'}
+            - {property: 'pagina' , label: 'Op welke pagina?'}
+            - {property: 'h1_titel' , label: 'Hoofdtitel'}
 
      Textfield:
         class: App\Entity\Textfield
+        label: 'Tekstvelden'
+        help: 'Maak/bekijk hier jouw tekstvelden die je op de verschillende onderdelen hebt gezet'
+        form:
+          fields:
+            - {property: 'title' , label: 'Titel tekst'}
+            - {property: 'sectionId' , label: 'Op welke paginaonderdeel?'}
+            - {property: 'tekst' , label: 'De uitgebreide tekst'}
+            - {property: 'link' , label: 'Link naar iets?'}
+            - {property: 'image' , label: 'Een afbeelding?'}
+
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'title' , label: 'Titel tekst'}
+            - {property: 'tekst' , label: 'De uitgebreide tekst'}
+            - {property: 'link' , label: 'Link naar iets?'}
+            - {property: 'image' , label: 'Een afbeelding?'}
 
      Works:
         class: App\Entity\Works
@@ -123,14 +155,14 @@ easy_admin:
         form:
           fields:
             - {property: 'naam', label: 'Naam Werk'}
-            - {property: 'filename', label: 'Afbeelding'}
+            - {property: 'imageFile', label: 'Afbeelding', type: 'file'}
             - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
             - {property: 'category', label: 'Categorie'}
             - {property: 'userId', label: 'User'}
         list:
           fields:
             - {property: 'naam', label: 'Naam Werk'}
-            - {property: 'filename', label: 'Afbeelding'}
+            - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images/works'}
             - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
             - {property: 'category', label: 'Categorie'}
 

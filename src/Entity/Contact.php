@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *     collectionOperations={"post"},
+ *     itemOperations={"get"}
  *
  * )
  * @ORM\Entity(repositoryClass=ContactRepository::class)

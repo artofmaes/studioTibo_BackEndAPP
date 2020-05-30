@@ -7,6 +7,8 @@ use App\Repository\WorksRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     itemOperations={"get"}
  * )
  * @ORM\Entity(repositoryClass=WorksRepository::class)
+ * @Vich\Uploadable
  */
 class Works
 {
@@ -33,6 +36,12 @@ class Works
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="works", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -192,5 +201,22 @@ class Works
         }
 
         return $this;
+    }
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 }
