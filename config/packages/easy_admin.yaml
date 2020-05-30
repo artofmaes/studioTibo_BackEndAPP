@@ -1,0 +1,132 @@
+easy_admin:
+   site_name: '<img src="C:/Bitnami/wampstack-7.2.31-0/apache2/htdocs/studioTibo/assets/images/logokleur.jpg"/> Studio Tibo'
+   design:
+     assets:
+       favicon: '../../assets/images/logokleur.jpg'
+     brand_color: 'red'
+     menu: ['User', 'Works', 'Category', 'Sections', 'Textfield','Pagina', 'Lessen', 'Events', 'Contact']
+
+   user:
+     name_property_path: 'voornaam'
+     display_avatar: false
+
+   entities:
+       # List the entity class name you want to manage
+     User:
+       class: App\Entity\User
+       label: 'Gebruikers'
+       help: 'Hier kan je een lijst zien van alle gebruikers die hierop kunnen werken.'
+       form:
+         fields:
+           - {property: 'voornaam'}
+           - {property: 'naam'}
+           - {property: 'email'}
+           - {property: 'password', label: 'Wachtwoord', type: 'password'}
+       list:
+         sort: ['id', 'ASC']
+         fields:
+           - voornaam
+           - naam
+           - email
+
+     Category:
+        class: App\Entity\Category
+        label: 'Categorieën'
+        help: 'Bekijk hier alle categorieën.'
+        form:
+          fields:
+            - {property: 'cat_name' , label: 'Categorienaam'}
+            - {property: 'cat_img' , label: 'Header van de categorie'}
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'cat_name' , label: 'Categorienaam'}
+            - {property: 'cat_img' , label: 'Header van de categorie', type: 'image', base_path: '/assets/images/category/'}
+
+     Events:
+        class: App\Entity\Events
+        label: 'Evenementen'
+        help: 'Maak hier jouw evenementen aan.'
+        form:
+          fields:
+            - {property: 'naam' , label: 'Naam evenement'}
+            - {property: 'img' , label: 'Afbeelding evenement'}
+            - {property: 'beschrijving' , label: 'Beschrijving'}
+            - {property: 'link' , label: 'website-url'}
+            - {property: 'adres' , label: 'Adres'}
+            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'locatie' , label: 'Gemeente'}
+            - {property: 'event_start' , label: 'Startdatum', type_options: { widget: 'single_text' } }
+            - {property: 'event_end' , label: 'Einddatum',  type_options: { widget: 'single_text' } }
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'naam' , label: 'Naam evenement'}
+            - {property: 'img' , label: 'Afbeelding evenement'}
+            - {property: 'beschrijving' , label: 'Beschrijving'}
+            - {property: 'link' , label: 'website-url'}
+            - {property: 'adres' , label: 'Adres'}
+            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'locatie' , label: 'Gemeente'}
+            - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
+            - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
+
+
+     Lessen:
+        class: App\Entity\Lessen
+        label: 'Lessenrooster'
+        help: 'Maak hier jouw lessen aan.'
+        form:
+          fields:
+            - {property: 'datum' , label: 'Dag van de les'}
+            - {property: 'klasgroep' , label: 'Klasgroep'}
+            - {property: 'locatie' , label: 'Waar vindt het plaats?'}
+            - {property: 'adres' , label: 'Adres'}
+            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'locatie' , label: 'Gemeente'}
+
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'datum' , label: 'Dag van de les'}
+            - {property: 'klasgroep' , label: 'Klasgroep'}
+            - {property: 'locatie' , label: 'Waar vindt het plaats?'}
+            - {property: 'adres' , label: 'Adres'}
+            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'locatie' , label: 'Gemeente'}
+
+
+     Pagina:
+        class: App\Entity\Pagina
+        label: 'Paginas Website'
+        help: 'Maak hier jouw pagina aan'
+        form:
+          fields:
+            - {property: 'pagina_naam' , label: 'Naam van de pagina'}
+
+
+        list:
+          sort: ['id', 'ASC']
+          fields:
+            - {property: 'pagina_naam' , label: 'Naam van de pagina'}
+
+     Sections:
+        class: App\Entity\Sections
+
+     Textfield:
+        class: App\Entity\Textfield
+
+     Works:
+        class: App\Entity\Works
+
+     Contact:
+        class: App\Entity\Contact
+        label: 'Contact'
+        help: 'Een lijst van alle mensen die contact met jou willen opnemen'
+        list:
+          fields:
+            - {property: 'naam', label: 'Naam contactpersoon'}
+            - {property: 'email', label: 'Hun e-mailadres', type: 'email'}
+            - {property: 'vraag', label: 'Hun vraag'}
+            - {property: 'created_at', label: 'Verzenddatum', type: 'date'}
+            - {property: 'is_answered', label: 'Contact opgenomen?', type: 'toggle'}
