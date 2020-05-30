@@ -103,7 +103,6 @@ class Category
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return (string) $this->catName;
-        return (string) $this->catImg;
+        return $this->getCatName();
     }
 }

@@ -1,8 +1,8 @@
 easy_admin:
-   site_name: '<img src="C:/Bitnami/wampstack-7.2.31-0/apache2/htdocs/studioTibo/assets/images/logokleur.jpg"/> Studio Tibo'
+   site_name: '<img src="../../assets/images/studiotibo-logo-wit.png"/>'
    design:
      assets:
-       favicon: '../../assets/images/logokleur.jpg'
+       favicon: '../../assets/images/favicon-32x32.png'
      brand_color: 'red'
      menu: ['User', 'Works', 'Category', 'Sections', 'Textfield','Pagina', 'Lessen', 'Events', 'Contact']
 
@@ -118,6 +118,21 @@ easy_admin:
 
      Works:
         class: App\Entity\Works
+        label: 'Werken'
+        help: 'Een lijst van al jouw werken en waar ze toe behoren'
+        form:
+          fields:
+            - {property: 'naam', label: 'Naam Werk'}
+            - {property: 'filename', label: 'Afbeelding'}
+            - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
+            - {property: 'category', label: 'Categorie'}
+            - {property: 'userId', label: 'User'}
+        list:
+          fields:
+            - {property: 'naam', label: 'Naam Werk'}
+            - {property: 'filename', label: 'Afbeelding'}
+            - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
+            - {property: 'category', label: 'Categorie'}
 
      Contact:
         class: App\Entity\Contact

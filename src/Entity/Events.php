@@ -256,4 +256,10 @@ class Events
 
         return $this;
     }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return (string) $this->getUserId();
+    }
 }
