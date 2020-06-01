@@ -73,8 +73,8 @@ easy_admin:
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
             - {property: 'locatie' , label: 'Gemeente'}
-            - {property: 'event_start' , label: 'Startdatum', type_options: { widget: 'single_text' } }
-            - {property: 'event_end' , label: 'Einddatum',  type_options: { widget: 'single_text' } }
+            - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
+            - {property: 'event_end' , label: 'Einddatum',  type: 'datetime' }
         list:
           sort: ['id', 'ASC']
           fields:
@@ -186,11 +186,12 @@ easy_admin:
      Contact:
         class: App\Entity\Contact
         label: 'Contact'
+        disabled_actions: ['new','edit']
         help: 'Een lijst van alle mensen die contact met jou willen opnemen'
         list:
           fields:
             - {property: 'naam', label: 'Naam contactpersoon'}
             - {property: 'email', label: 'Hun e-mailadres', type: 'email'}
-            - {property: 'vraag', label: 'Hun vraag'}
+            - {property: 'vraag', label: 'Hun vraag', type: 'textarea'}
             - {property: 'created_at', label: 'Verzenddatum', type: 'date'}
             - {property: 'is_answered', label: 'Contact opgenomen?', type: 'toggle'}
