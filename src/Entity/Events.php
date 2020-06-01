@@ -253,10 +253,10 @@ class Events
     }
 
 
-    public function getUserId(): ?User
-    {
-        return $this->userId;
-    }
+//    public function getUserId(): ?User
+//    {
+//        return $this->userId;
+//    }
 
     public function setUserId(?User $userId): self
     {
@@ -268,6 +268,6 @@ class Events
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return (string) $this->getUserId();
+        return (string) $this->userId;
     }
 }

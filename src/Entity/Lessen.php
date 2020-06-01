@@ -141,10 +141,10 @@ class Lessen
         return $this;
     }
 
-    public function getUserId(): ?User
-    {
-        return $this->userId;
-    }
+//    public function getUserId(): ?User
+//    {
+//        return $this->userId;
+//    }
 
     public function setUserId(?User $userId): self
     {

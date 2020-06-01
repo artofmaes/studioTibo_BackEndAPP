@@ -137,10 +137,10 @@ class Sections
         return $this->isDeleted;
     }
 
-    public function getUserId(): ?User
-    {
-        return $this->userId;
-    }
+//    public function getUserId(): ?User
+//    {
+//        return $this->userId;
+//    }
 
     public function setUserId(?User $userId): self
     {
