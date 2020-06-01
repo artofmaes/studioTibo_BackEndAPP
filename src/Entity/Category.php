@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
+ *     itemOperations={"get"={"path"="/category/{id}"}}
  *
  * )
  * @ORM\Entity(repositoryClass=CategoryRepository::class)

@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LessenRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     collectionOperations={"get"= {"path"="/lessen"}},
+ *     itemOperations={"get"= {"path"="/les/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=LessenRepository::class)
  */
@@ -57,6 +58,11 @@ class Lessen
      * @ORM\JoinColumn(nullable=false)
      */
     private $userId;
+
+    public function __construct()
+    {
+        $this->userId = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

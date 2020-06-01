@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"={"path"="/section/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=SectionsRepository::class)
  */
@@ -72,6 +72,7 @@ class Sections
 
     public function __construct()
     {
+        $this->userId = new ArrayCollection();
         $this->pagina = new ArrayCollection();
         $this->textfield = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();

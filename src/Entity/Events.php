@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"= {"path"="/event/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=EventsRepository::class)
  */
@@ -69,32 +71,38 @@ class Events
 
     /**
      * @ORM\Column(type="datetime")
+     *
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      */
     private $deletedAt;
 
     /**
      * @ORM\Column(type="boolean")
+     *
      */
     private $isDeleted = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="event")
      * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $userId;
 
     public function __construct()
     {
+        $this->userId = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
 
         $this->isDeleted = false;

@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"={"path"="/work/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=WorksRepository::class)
  * @Vich\Uploadable
@@ -81,6 +81,7 @@ class Works
 
     public function __construct()
     {
+        $this->userId = new ArrayCollection();
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();

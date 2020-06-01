@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"={"path"="/pagina/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=PaginaRepository::class)
  */

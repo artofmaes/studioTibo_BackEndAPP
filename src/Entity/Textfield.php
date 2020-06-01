@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"={"path"="/textfield/{id}"}}
  * )
  * @ORM\Entity(repositoryClass=TextfieldRepository::class)
  */
