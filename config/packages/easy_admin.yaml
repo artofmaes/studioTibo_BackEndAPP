@@ -3,8 +3,25 @@ easy_admin:
    design:
      assets:
        favicon: '../../assets/images/favicon-32x32.png'
-     brand_color: 'red'
-     menu: ['User', 'Works', 'Category', 'Sections', 'Textfield','Pagina', 'Lessen', 'Events', 'Contact']
+       css:
+         - '../../assets/css/style.css'
+
+     menu:
+       - label: 'Afbeeldingen'
+         icon: 'image'
+         children: ['Works', 'Category']
+       - label: 'Paginaonderdelen aanpassen'
+         icon: 'file'
+         children: ['Sections', 'Textfield', 'Pagina']
+       - label: 'Lessen en evenementen'
+         icon: 'calendar'
+         children: ['Lessen', 'Events']
+       - label: 'Mensen die contact willen'
+         icon: 'envelope'
+         children: ['Contact']
+       - label: 'Users toevoegen/verwijderen'
+         icon: 'users'
+         children: ['User']
 
    user:
      name_property_path: 'voornaam'

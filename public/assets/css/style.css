@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap');
+
+body{
+    background: #214b7d;
+    font: 100%/1.4 Montserrat, Arial, sans-serif;
+    font-size: .9em;
+}
+
+.main-header #header-logo img{
+    width: 10%;
+}
+
+.main-sidebar{
+    background: #96b5dc;
+    width: 100%;
+}
+
+.main-sidebar ul li{
+    padding: 10px;
+    font-size: .9em;
+    font-weight: 600;
+    transition: all .5s ease;
+}
+
+.main-sidebar .treeview i.treeview-icon, .main-sidebar .treeview i{
+    color: #c63a25;
+}
+
+.navbar-custom-menu .user-name {
+    margin-top: 82px;
+    font-size: 2em;
+    color: white;
+    font-weight: 600;
+}
+
+
+.sidebar-menu .fa{
+    opacity: 100%;
+    font-size: 1.5em;
+    padding: 10px;
+    margin-right: 28px;
+    margin-top: -2px;
+}
+
+.main-sidebar ul li:hover{
+    background: #EEE;
+    color: #96b5dc;
+}
+
+.main-sidebar .active{
+    background: #EEE;
+    color: #96b5dc;
+    font-weight: 600;
+}
+
+@media (min-width: 992px){
+    .wrapper {
+        grid-template-columns: var(--sidebar-width) auto;
+        grid-column-gap: 15px;
+        grid-template-areas:
+                "header header header header"
+                "sidebar sidebar content-wrapper content-wrapper";
+        margin-left: auto;
+        margin-right: auto;
+        width: calc(100% - 40px);
+    }
+}
+
+.content{
+    border-radius: 0;
+    box-shadow: none;
+}
