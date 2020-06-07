@@ -5,13 +5,18 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TextfieldRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"={"path"="/textfield/{id}"}}
+ *     itemOperations={"get"={"path"="/textfield/{id}"}},
+ *     normalizationContext={"groups"={"textfield:read"}}
  * )
  * @ORM\Entity(repositoryClass=TextfieldRepository::class)
+ * @Vich\Uploadable
  */
 class Textfield
 {
@@ -24,23 +29,34 @@ class Textfield
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"textfield:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"textfield:read"})
      */
     private $tekst;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"textfield:read"})
      */
     private $link;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"textfield:read"})
      */
     private $image;
+
+
+    /**
+     * @Vich\UploadableField(mapping="works", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
@@ -65,6 +81,7 @@ class Textfield
     /**
      * @ORM\ManyToOne(targetEntity=Sections::class, inversedBy="textfield")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"textfield:read"})
      */
     private $sectionId;
 
@@ -169,5 +186,29 @@ class Textfield
         $this->sectionId = $sectionId;
 
         return $this;
+    }
+
+    public function setImageFile(File $image= null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return (string) $this->getTitle();
     }
 }

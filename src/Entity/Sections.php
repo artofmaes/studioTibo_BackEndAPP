@@ -7,11 +7,14 @@ use App\Repository\SectionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"={"path"="/section/{id}"}}
+ *     itemOperations={"get"={"path"="/section/{id}"}},
+ *
+ *     normalizationContext={"groups"={"sections:read"}}
  * )
  * @ORM\Entity(repositoryClass=SectionsRepository::class)
  */
@@ -26,11 +29,13 @@ class Sections
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"sections:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"sections:read"})
      */
     private $h1Titel;
 
@@ -57,22 +62,25 @@ class Sections
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="section")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"sections:read"})
      */
     private $userId;
 
     /**
      * @ORM\ManyToMany(targetEntity=Pagina::class, inversedBy="sections")
+     * @Groups({"sections:read"})
      */
     private $pagina;
 
     /**
      * @ORM\OneToMany(targetEntity=Textfield::class, mappedBy="sectionId", orphanRemoval=true)
+     * @Groups({"sections:read"})
      */
     private $textfield;
 
     public function __construct()
     {
-        $this->userId = new ArrayCollection();
+       // $this->userId = new ArrayCollection();
         $this->pagina = new ArrayCollection();
         $this->textfield = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
@@ -137,10 +145,10 @@ class Sections
         return $this->isDeleted;
     }
 
-//    public function getUserId(): ?User
-//    {
-//        return $this->userId;
-//    }
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
 
     public function setUserId(?User $userId): self
     {

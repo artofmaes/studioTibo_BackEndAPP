@@ -7,13 +7,15 @@ use App\Repository\WorksRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Entity\File;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"={"path"="/work/{id}"}}
+ *     itemOperations={"get"={"path"="/work/{id}"}},
+ *     normalizationContext={"groups"={"works:read"}}
  * )
  * @ORM\Entity(repositoryClass=WorksRepository::class)
  * @Vich\Uploadable
@@ -29,22 +31,25 @@ class Works
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"works:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"works:read"})
      */
     private $filename;
 
     /**
-     * @Vich\UploadableField(mapping="works", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="works", fileNameProperty="filename")
      * @var File
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"works:read"})
      */
     private $beschrijving;
 
@@ -71,17 +76,19 @@ class Works
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="work")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"works:read"})
      */
     private $userId;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="workId")
+     * @Groups({"works:read"})
      */
     private $category;
 
     public function __construct()
     {
-        $this->userId = new ArrayCollection();
+        //$this->userId = new ArrayCollection();
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
@@ -166,10 +173,10 @@ class Works
         return $this;
     }
 
-//    public function getUserId(): ?User
-//    {
-//        return $this->userId;
-//    }
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
 
     public function setUserId(?User $userId): self
     {
@@ -203,14 +210,14 @@ class Works
 
         return $this;
     }
-    public function setImageFile(File $image = null)
+    public function setImageFile(File $filename = null)
     {
-        $this->imageFile = $image;
+        $this->imageFile = $filename;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
+        if ($filename) {
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
@@ -219,5 +226,11 @@ class Works
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return (string) $this->getNaam();
     }
 }

@@ -6,14 +6,18 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"= {"path"="/event/{id}"}}
+ *     itemOperations={"get"= {"path"="/event/{id}"}},
+ *     normalizationContext={"groups"={"events:read"}}
  * )
  * @ORM\Entity(repositoryClass=EventsRepository::class)
+ * @Vich\Uploadable
  */
 class Events
 {
@@ -26,46 +30,63 @@ class Events
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
      */
     private $img;
 
+
+    /**
+     * @Vich\UploadableField(mapping="works", fileNameProperty="img")
+     * @var File
+     */
+    private $imageFile;
+
     /**
      * @ORM\Column(type="text")
+     * @Groups("events:read")
      */
     private $beschrijving;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
      */
     private $link;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
      */
     private $adres;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
+     *
      */
     private $postcode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("events:read")
      */
     private $locatie;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("events:read")
      */
     private $eventStart;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("events:read")
      */
     private $eventEnd;
 
@@ -263,6 +284,24 @@ class Events
         $this->userId = $userId;
 
         return $this;
+    }
+
+    public function setImageFile(File $img= null)
+    {
+        $this->imageFile = $img;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($img) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
     public function __toString()

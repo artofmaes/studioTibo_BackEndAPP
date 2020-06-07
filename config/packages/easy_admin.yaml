@@ -1,6 +1,9 @@
 easy_admin:
    site_name: '<img src="../../assets/images/studiotibo-logo-wit.png"/>'
    design:
+     form_theme:
+       - '@EasyAdmin/form/bootstrap_4.html.twig'
+       - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
      assets:
        favicon: '../../assets/images/favicon-32x32.png'
        css:
@@ -26,9 +29,30 @@ easy_admin:
    user:
      name_property_path: 'voornaam'
      display_avatar: false
-
+   list:
+     actions:
+       - { name: 'show', icon: 'info-circle' }
+       - { name: 'edit', icon: 'pencil' }
+       - { name: 'delete', icon: 'trash-alt' }
    entities:
        # List the entity class name you want to manage
+     Works:
+       class: App\Entity\Works
+       label: 'Werken'
+       help: 'Een lijst van al jouw werken en waar ze toe behoren'
+       form:
+         fields:
+           - {property: 'naam', label: 'Naam Werk'}
+           - {property: 'imageFile', type: 'vich_image' }
+           - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
+           - {property: 'category', label: 'Categorie'}
+           - {property: 'userId', label: 'User'}
+       list:
+         fields:
+           - {property: 'naam', label: 'Naam Werk'}
+           - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images', type: 'image'}
+           - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
+           - {property: 'category', label: 'Categorie'}
      User:
        class: App\Entity\User
        label: 'Gebruikers'
@@ -40,7 +64,7 @@ easy_admin:
            - {property: 'email'}
            - {property: 'password', label: 'Wachtwoord', type: 'password'}
        list:
-         sort: ['id', 'ASC']
+
          fields:
            - voornaam
            - naam
@@ -53,12 +77,12 @@ easy_admin:
         form:
           fields:
             - {property: 'cat_name' , label: 'Categorienaam'}
-            - {property: 'cat_img' , label: 'Header van de categorie'}
+            - {property: 'imageFile', type: 'vich_image' }
         list:
           sort: ['id', 'ASC']
           fields:
             - {property: 'cat_name' , label: 'Categorienaam'}
-            - {property: 'cat_img' , label: 'Header van de categorie', type: 'image', base_path: '/assets/images/category/'}
+            - {property: 'cat_img' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
 
      Events:
         class: App\Entity\Events
@@ -67,14 +91,14 @@ easy_admin:
         form:
           fields:
             - {property: 'naam' , label: 'Naam evenement'}
-            - {property: 'img' , label: 'Afbeelding evenement'}
+            - {property: 'imageFile' , label: 'Afbeelding evenement', type: 'vich_image'}
             - {property: 'beschrijving' , label: 'Beschrijving'}
             - {property: 'link' , label: 'website-url'}
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
             - {property: 'locatie' , label: 'Gemeente'}
-            - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
-            - {property: 'event_end' , label: 'Einddatum',  type: 'datetime' }
+            - {property: 'event_start' , label: 'Startdatum', type_options: {widget: 'single_text'}}
+            - {property: 'event_end' , label: 'Einddatum',  type_options: {widget: 'single_text'} }
         list:
           sort: ['id', 'ASC']
           fields:
@@ -100,7 +124,7 @@ easy_admin:
             - {property: 'locatie' , label: 'Waar vindt het plaats?'}
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
-            - {property: 'locatie' , label: 'Gemeente'}
+            - {property: 'gemeente' , label: 'Gemeente'}
 
         list:
           sort: ['id', 'ASC']
@@ -153,9 +177,9 @@ easy_admin:
           fields:
             - {property: 'title' , label: 'Titel tekst'}
             - {property: 'sectionId' , label: 'Op welke paginaonderdeel?'}
-            - {property: 'tekst' , label: 'De uitgebreide tekst'}
+            - {property: 'tekst' , label: 'De uitgebreide tekst', type: 'fos_ckeditor'}
             - {property: 'link' , label: 'Link naar iets?'}
-            - {property: 'image' , label: 'Een afbeelding?'}
+            - {property: 'imageFile', type: 'vich_image' }
 
         list:
           sort: ['id', 'ASC']
@@ -163,35 +187,19 @@ easy_admin:
             - {property: 'title' , label: 'Titel tekst'}
             - {property: 'tekst' , label: 'De uitgebreide tekst'}
             - {property: 'link' , label: 'Link naar iets?'}
-            - {property: 'image' , label: 'Een afbeelding?'}
+            - {property: 'image' , label: 'Een afbeelding', base_path: '/assets/images', type: 'image'}
 
-     Works:
-        class: App\Entity\Works
-        label: 'Werken'
-        help: 'Een lijst van al jouw werken en waar ze toe behoren'
-        form:
-          fields:
-            - {property: 'naam', label: 'Naam Werk'}
-            - {property: 'imageFile', label: 'Afbeelding', type: 'file'}
-            - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
-            - {property: 'category', label: 'Categorie'}
-            - {property: 'userId', label: 'User'}
-        list:
-          fields:
-            - {property: 'naam', label: 'Naam Werk'}
-            - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images/works'}
-            - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
-            - {property: 'category', label: 'Categorie'}
+
 
      Contact:
         class: App\Entity\Contact
         label: 'Contact'
-        disabled_actions: ['new','edit']
+        disabled_actions: ['new']
         help: 'Een lijst van alle mensen die contact met jou willen opnemen'
         list:
           fields:
             - {property: 'naam', label: 'Naam contactpersoon'}
             - {property: 'email', label: 'Hun e-mailadres', type: 'email'}
-            - {property: 'vraag', label: 'Hun vraag', type: 'textarea'}
+            - {property: 'vraag', label: 'Hun vraag', type: 'text'}
             - {property: 'created_at', label: 'Verzenddatum', type: 'date'}
             - {property: 'is_answered', label: 'Contact opgenomen?', type: 'toggle'}

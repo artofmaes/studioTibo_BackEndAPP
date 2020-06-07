@@ -6,11 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LessenRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"= {"path"="/lessen"}},
- *     itemOperations={"get"= {"path"="/les/{id}"}}
+ *     itemOperations={"get"= {"path"="/les/{id}"}},
+ *     normalizationContext={"groups"={"lessen:read"}}
  * )
  * @ORM\Entity(repositoryClass=LessenRepository::class)
  */
@@ -25,44 +27,48 @@ class Lessen
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $klasgroep;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $locatie;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $adres;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $postcode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"lessen:read"})
      */
     private $gemeente;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="les")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"lessen:read"})
      */
     private $userId;
 
-    public function __construct()
-    {
-        $this->userId = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
@@ -141,10 +147,10 @@ class Lessen
         return $this;
     }
 
-//    public function getUserId(): ?User
-//    {
-//        return $this->userId;
-//    }
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
 
     public function setUserId(?User $userId): self
     {

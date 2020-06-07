@@ -2,17 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\SqlFormatter\Token;
+
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
+
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -37,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiFilter(PropertyFilter::class)
+ *
  * @UniqueEntity(fields={"email"})
  *
  */
@@ -52,7 +50,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:read","user:write"})
+     *
      * @Assert\NotBlank()
      * @Assert\Email()
      */
@@ -60,7 +58,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"admin:write"})
+     *
      */
     private $roles = [];
 
@@ -72,7 +70,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Groups({"user:write"})
+     *
      * @SerializedName("password")
      * @Assert\NotBlank(groups={"create"})
      */
@@ -100,18 +98,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:get", "user:write"})
+     *
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:get", "user:write"})
+     *
      */
     private $voornaam;
 
     public function __construct()
     {
+        $this->roles[] = 'ROLE_USER';
         $this->work = new ArrayCollection();
         $this->event = new ArrayCollection();
         $this->les = new ArrayCollection();
