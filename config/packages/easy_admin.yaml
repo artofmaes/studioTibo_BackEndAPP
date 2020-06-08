@@ -51,7 +51,6 @@ easy_admin:
          fields:
            - {property: 'naam', label: 'Naam Werk'}
            - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images', type: 'image'}
-           - {property: 'beschrijving', label: 'Beschrijving afbeelding'}
            - {property: 'category', label: 'Categorie'}
      User:
        class: App\Entity\User
@@ -97,8 +96,8 @@ easy_admin:
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
             - {property: 'locatie' , label: 'Gemeente'}
-            - {property: 'event_start' , label: 'Startdatum', type_options: {widget: 'single_text'}}
-            - {property: 'event_end' , label: 'Einddatum',  type_options: {widget: 'single_text'} }
+            - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
+            - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
         list:
           sort: ['id', 'ASC']
           fields:

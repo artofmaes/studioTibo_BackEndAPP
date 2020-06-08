@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\WorksRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,6 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * )
  * @ORM\Entity(repositoryClass=WorksRepository::class)
  * @Vich\Uploadable
+ * @ApiFilter(SearchFilter::class, properties={"category":"partial"})
  */
 class Works
 {

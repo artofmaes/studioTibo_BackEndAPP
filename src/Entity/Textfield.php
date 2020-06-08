@@ -29,25 +29,25 @@ class Textfield
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"textfield:read"})
+     * @Groups({"textfield:read", "sections:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"textfield:read"})
+     * @Groups({"textfield:read", "sections:read"})
      */
     private $tekst;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"textfield:read"})
+     * @Groups({"textfield:read", "sections:read"})
      */
     private $link;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"textfield:read"})
+     * @Groups({"textfield:read", "sections:read"})
      */
     private $image;
 
