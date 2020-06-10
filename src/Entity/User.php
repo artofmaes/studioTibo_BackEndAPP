@@ -344,6 +344,7 @@ class User implements UserInterface
     }
 
 
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
