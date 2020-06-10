@@ -68,6 +68,16 @@ class Lessen
      */
     private $userId;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $startUur;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $eindUur;
+
 
 
     public function getId(): ?int
@@ -155,6 +165,30 @@ class Lessen
     public function setUserId(?User $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getStartUur(): ?\DateTimeInterface
+    {
+        return $this->startUur;
+    }
+
+    public function setStartUur(\DateTimeInterface $startUur): self
+    {
+        $this->startUur = $startUur;
+
+        return $this;
+    }
+
+    public function getEindUur(): ?\DateTimeInterface
+    {
+        return $this->eindUur;
+    }
+
+    public function setEindUur(\DateTimeInterface $eindUur): self
+    {
+        $this->eindUur = $eindUur;
 
         return $this;
     }

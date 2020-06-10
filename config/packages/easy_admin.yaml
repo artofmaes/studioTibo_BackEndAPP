@@ -52,6 +52,11 @@ easy_admin:
            - {property: 'naam', label: 'Naam Werk'}
            - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images', type: 'image'}
            - {property: 'category', label: 'Categorie'}
+       show:
+         fields:
+           - {property: 'naam', label: 'Naam Werk'}
+           - {property: 'filename', label: 'Afbeelding', base_path: '/assets/images', type: 'image'}
+           - {property: 'category', label: 'Categorie'}
      User:
        class: App\Entity\User
        label: 'Gebruikers'
@@ -63,11 +68,15 @@ easy_admin:
            - {property: 'email'}
            - {property: 'password', label: 'Wachtwoord', type: 'password'}
        list:
-
          fields:
            - voornaam
            - naam
            - email
+       show:
+         fields:
+           - {property: 'voornaam'}
+           - {property: 'naam'}
+           - {property: 'email'}
 
      Category:
         class: App\Entity\Category
@@ -78,10 +87,14 @@ easy_admin:
             - {property: 'cat_name' , label: 'Categorienaam'}
             - {property: 'imageFile', type: 'vich_image' }
         list:
-          sort: ['id', 'ASC']
           fields:
             - {property: 'cat_name' , label: 'Categorienaam'}
             - {property: 'cat_img' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
+        show:
+          fields:
+            - {property: 'cat_name' , label: 'Categorienaam'}
+            - {property: 'cat_img' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
+            - {property: 'workId' , label: 'Werken'}
 
      Events:
         class: App\Entity\Events
@@ -107,7 +120,16 @@ easy_admin:
             - {property: 'locatie' , label: 'Gemeente'}
             - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
             - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
-
+        show:
+          fields:
+            - {property: 'naam' , label: 'Naam evenement'}
+            - {property: 'img' , label: 'Afbeelding evenement', base_path: '/assets/images', type: 'image'}
+            - {property: 'link' , label: 'website-url', type: 'url'}
+            - {property: 'adres' , label: 'Adres'}
+            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'locatie' , label: 'Gemeente'}
+            - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
+            - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
 
      Lessen:
         class: App\Entity\Lessen
@@ -121,6 +143,9 @@ easy_admin:
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
             - {property: 'gemeente' , label: 'Gemeente'}
+            - {property: 'startUur', label: 'Startuur', type: 'time'}
+            - {property: 'eindUur', label: 'Einduur', type: 'time'}
+            - {property: 'userId', label: 'User'}
 
         list:
           sort: ['id', 'ASC']
@@ -128,10 +153,19 @@ easy_admin:
             - {property: 'datum' , label: 'Dag van de les'}
             - {property: 'klasgroep' , label: 'Klasgroep'}
             - {property: 'locatie' , label: 'Waar vindt het plaats?'}
+            - {property: 'startUur', label: 'Startuur', type: 'time'}
+            - {property: 'eindUur', label: 'Einduur', type: 'time'}
+
+        show:
+          fields:
+            - {property: 'datum' , label: 'Dag van de les'}
+            - {property: 'klasgroep' , label: 'Klasgroep'}
+            - {property: 'locatie' , label: 'Waar vindt het plaats?'}
             - {property: 'adres' , label: 'Adres'}
             - {property: 'postcode' , label: 'Postcode'}
-            - {property: 'locatie' , label: 'Gemeente'}
-
+            - {property: 'gemeente' , label: 'Gemeente'}
+            - {property: 'startUur', label: 'Startuur', type: 'time'}
+            - {property: 'eindUur', label: 'Einduur', type: 'time'}
 
      Pagina:
         class: App\Entity\Pagina
@@ -147,6 +181,10 @@ easy_admin:
           fields:
             - {property: 'pagina_naam' , label: 'Naam van de pagina'}
 
+        show:
+          fields:
+            - {property: 'pagina_naam' , label: 'Naam van de pagina'}
+            - {property: 'sections', label: 'Paginaonderdelen'}
      Sections:
         class: App\Entity\Sections
         label: 'Paginaonderdelen'
@@ -164,6 +202,13 @@ easy_admin:
             - {property: 'naam' , label: 'Naam onderdeel'}
             - {property: 'pagina' , label: 'Op welke pagina?'}
             - {property: 'h1_titel' , label: 'Hoofdtitel'}
+
+        show:
+          fields:
+            - {property: 'naam' , label: 'Naam onderdeel'}
+            - {property: 'pagina' , label: 'Op welke pagina?'}
+            - {property: 'h1_titel' , label: 'Hoofdtitel'}
+            - {property: 'textfield', label: 'Tekstvelden'}
 
      Textfield:
         class: App\Entity\Textfield
@@ -184,7 +229,13 @@ easy_admin:
             - {property: 'tekst' , label: 'De uitgebreide tekst'}
             - {property: 'link' , label: 'Link naar iets?'}
             - {property: 'image' , label: 'Een afbeelding', base_path: '/assets/images', type: 'image'}
-
+        show:
+          fields:
+            - {property: 'title' , label: 'Titel tekst'}
+            - {property: 'tekst' , label: 'De uitgebreide tekst'}
+            - {property: 'link' , label: 'Link naar iets?'}
+            - {property: 'image' , label: 'Een afbeelding', base_path: '/assets/images', type: 'image'}
+            - {property: 'sectionId', label: 'Paginaonderdeel'}
 
 
      Contact:
@@ -199,3 +250,9 @@ easy_admin:
             - {property: 'vraag', label: 'Hun vraag', type: 'text'}
             - {property: 'created_at', label: 'Verzenddatum', type: 'date'}
             - {property: 'is_answered', label: 'Contact opgenomen?', type: 'toggle'}
+        show:
+          fields:
+            - {property: 'naam', label: 'Naam contactpersoon'}
+            - {property: 'email', label: 'Hun e-mailadres', type: 'email'}
+            - {property: 'vraag', label: 'Hun vraag'}
+            - {property: 'created_at', label: 'Verzenddatum', type: 'date'}
