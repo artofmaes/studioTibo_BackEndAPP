@@ -72,7 +72,7 @@ class User implements UserInterface
     /**
      *
      * @SerializedName("password")
-     * @Assert\NotBlank(groups={"create"})
+     * @Assert\NotBlank()
      */
     private $plainPassword;
 
