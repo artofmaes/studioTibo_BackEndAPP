@@ -98,15 +98,12 @@ easy_admin:
             - {property: 'locatie' , label: 'Gemeente'}
             - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
             - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
+            - {property: 'userId', label: 'User'}
         list:
           sort: ['id', 'ASC']
           fields:
             - {property: 'naam' , label: 'Naam evenement'}
-            - {property: 'img' , label: 'Afbeelding evenement'}
-            - {property: 'beschrijving' , label: 'Beschrijving'}
-            - {property: 'link' , label: 'website-url'}
-            - {property: 'adres' , label: 'Adres'}
-            - {property: 'postcode' , label: 'Postcode'}
+            - {property: 'img' , label: 'Afbeelding evenement', base_path: '/assets/images', type: 'image'}
             - {property: 'locatie' , label: 'Gemeente'}
             - {property: 'event_start' , label: 'Startdatum', type: 'datetime'}
             - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}

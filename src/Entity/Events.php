@@ -117,13 +117,14 @@ class Events
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="event")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("events:read")
      *
      */
     private $userId;
 
     public function __construct()
     {
-        $this->userId = new ArrayCollection();
+        //$this->userId = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
 
         $this->isDeleted = false;
@@ -274,10 +275,10 @@ class Events
     }
 
 
-//    public function getUserId(): ?User
-//    {
-//        return $this->userId;
-//    }
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
 
     public function setUserId(?User $userId): self
     {
