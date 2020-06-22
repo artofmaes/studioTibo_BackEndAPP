@@ -11,6 +11,8 @@ class AdminController extends EasyAdminController
 {
     protected function persistUserEntity($user)
     {
+        // Deze functie gaat het wachtwoord op een correcte manier aanmaken
+        // en toevoegen aan een user die nieuw wordt aangemaakt
         $encodedPassword = $this->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($encodedPassword);
 
@@ -19,6 +21,8 @@ class AdminController extends EasyAdminController
 
     protected function updateUserEntity($user)
     {
+        //Deze functie gaat het wachtwoord op een correcte manier aanmaken en
+        //toevoegen aan een user die wordt geüpdatet
         $encodedPassword = $this->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($encodedPassword);
 
@@ -27,6 +31,8 @@ class AdminController extends EasyAdminController
 
     private function encodePassword($user, $password)
     {
+        //Deze functie zorgt voor de encryptie van het wachtwoord, zodat deze niet open en bloot te grabbelen
+        //staat op de database
         $passwordEncoderFactory = new EncoderFactory([
             User::class => new MessageDigestPasswordEncoder('sha512', true, 5000)
         ]);

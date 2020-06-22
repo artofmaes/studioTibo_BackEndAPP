@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,8 +16,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"= {"path"="/event/{id}"}},
- *     normalizationContext={"groups"={"events:read"}}
+ *     normalizationContext={"groups"={"events:read"}},
+ *     attributes={"pagination_items_per_page"=3}
  * )
+ * @ApiFilter(OrderFilter::class, properties={"eventStart":"ASC"})
  * @ORM\Entity(repositoryClass=EventsRepository::class)
  * @Vich\Uploadable
  */
