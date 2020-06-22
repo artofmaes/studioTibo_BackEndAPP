@@ -113,7 +113,7 @@ easy_admin:
             - {property: 'event_end' , label: 'Einddatum', type: 'datetime'}
             - {property: 'userId', label: 'User'}
         list:
-          sort: ['id', 'ASC']
+          sort: ['eventStart', 'ASC']
           fields:
             - {property: 'naam' , label: 'Naam evenement'}
             - {property: 'img' , label: 'Afbeelding evenement', base_path: '/assets/images', type: 'image'}
@@ -186,6 +186,7 @@ easy_admin:
             - {property: 'pagina_naam' , label: 'Naam van de pagina'}
             - {property: 'sections', label: 'Paginaonderdelen'}
      Sections:
+        disabled_actions: ['new']
         class: App\Entity\Sections
         label: 'Paginaonderdelen'
         help: 'Maak/bekijk hier jouw paginaonderdelen'
@@ -197,7 +198,7 @@ easy_admin:
             - {property: 'userId' , label: 'Door wie?'}
 
         list:
-          sort: ['id', 'ASC']
+          sort: ['naam', 'ASC']
           fields:
             - {property: 'naam' , label: 'Naam onderdeel'}
             - {property: 'pagina' , label: 'Op welke pagina?'}

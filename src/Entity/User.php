@@ -65,7 +65,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     *
+     * @Assert\NotBlank()
      */
     private $password;
 
@@ -97,13 +97,13 @@ class User implements UserInterface
     private $section;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      *
      */
     private $naam;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      *
      */
     private $voornaam;
