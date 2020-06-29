@@ -53,6 +53,20 @@ class Contact
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->isAnswered = false;
+        // STANDAARD MAIL OPSTELLEN EN DOORSTUREN
+        $to=$_ENV['MIJN_MAIL'];
+        $subject='Iemand wilt contact opnemen!';
+        $message="<html>
+        <p>Dag Tibo</p>
+        <p> Iemand heeft contact met jou opgenomen. Ga naar jouw dashboard bij <a href='https://wdev.be/wdev_jordi/eindwerk/?entity=Contact&action=list&menuIndex=3&submenuIndex=0'>Contact</a> om hun bericht te lezen en hen terug te mailen.</p>
+        <p>Groeten</p>
+        <p>Jouw Dashboard</p>
+       </html>";
+        $headers="From: Studio Tibo Dashboard <".$_ENV['MIJN_ZENDERMAIL'].">" . "\r\n" .
+        'X-Mailer: PHP/'. phpversion() . "\r\n" .
+        'MIME-Version: 1.0' . "\r\n" .
+        'Content-type: text/html; charset=iso-8859-1';
+        mail($to, $subject, $message, $headers);
     }
 
     public function getId(): ?int
