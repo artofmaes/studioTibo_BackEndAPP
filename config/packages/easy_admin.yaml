@@ -25,6 +25,10 @@ easy_admin:
        - label: 'Users toevoegen/verwijderen'
          icon: 'users'
          children: ['User']
+       - label: 'Stuur gegevens door naar voren'
+         url: 'https://api.vercel.com/v1/integrations/deploy/QmYHaaKV91Vj8UYBpBHTc6T6zNrpMe3kyeAs1Ujn5HsuRF/i3zFLZedtS'
+         target: '_blank'
+         icon: 'server'
 
    user:
      name_property_path: 'voornaam'
