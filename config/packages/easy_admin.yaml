@@ -15,7 +15,7 @@ easy_admin:
          children: ['Works', 'Category']
        - label: 'Paginaonderdelen aanpassen'
          icon: 'file'
-         children: ['Sections', 'Textfield', 'Pagina']
+         children: ['Sections', 'Textfield', 'Pagina', 'Timeline']
        - label: 'Lessen en evenementen'
          icon: 'calendar'
          children: ['Lessen', 'Events']
@@ -95,7 +95,28 @@ easy_admin:
             - {property: 'cat_name' , label: 'Categorienaam'}
             - {property: 'cat_img' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
             - {property: 'workId' , label: 'Werken'}
-
+     Timeline:
+       class: App\Entity\Timeline
+       label: 'Tijdlijn'
+       help: 'Bekijk hier alle elementen van jouw tijdlijn'
+       form:
+         fields:
+           - {property: 'jaar' , label: 'Jaar'}
+           - {property: 'imageFile', type: 'vich_image'}
+           - {property: 'titel', label: 'Titel'}
+           - {property: 'tekst', label: 'Beschrijving'}
+       list:
+         fields:
+           - {property: 'jaar' , label: 'Jaar'}
+           - {property: 'titel', label: 'Titel'}
+           - {property: 'tekst', label: 'Beschrijving'}
+           - {property: 'image' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
+       show:
+         fields:
+           - {property: 'jaar' , label: 'jaar'}
+           - {property: 'titel', label: 'Titel'}
+           - {property: 'tekst', label: 'Beschrijving'}
+           - {property: 'image' , label: 'Header van de categorie',  base_path: '/assets/images', type: 'image'}
      Events:
         class: App\Entity\Events
         label: 'Evenementen'

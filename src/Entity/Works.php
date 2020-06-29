@@ -39,7 +39,7 @@ class Works
     private $naam;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"works:read"})
      */
     private $filename;
@@ -119,7 +119,7 @@ class Works
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
 

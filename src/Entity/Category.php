@@ -39,7 +39,7 @@ class Category
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $catImg;
 
@@ -82,7 +82,7 @@ class Category
         return $this->catImg;
     }
 
-    public function setCatImg(string $catImg): self
+    public function setCatImg(?string $catImg): self
     {
         $this->catImg = $catImg;
 

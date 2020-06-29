@@ -39,7 +39,7 @@ class Events
     private $naam;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups("events:read")
      */
     private $img;
@@ -156,7 +156,7 @@ class Events
         return $this->img;
     }
 
-    public function setImg(string $img): self
+    public function setImg(?string $img): self
     {
         $this->img = $img;
         $this->updatedAt = new \DateTimeImmutable();
