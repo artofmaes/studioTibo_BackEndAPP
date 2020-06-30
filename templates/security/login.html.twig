@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Studio Tibo - Achterpoort{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" crossorigin="anonymous">
+{% endblock %}
 
 {% block body %}
     <form method="post" class="container ">
         <div class="row">
-            <img src="{{ asset('assets/images/logokleur.jpg') }}" alt="Studio Tibo" class=" col"/>
-            <div class="d-flex  align-items-center">
+            <img src="{{ asset('assets/images/studiotibo-logo-wit.png') }}" alt="Studio Tibo"/>
+            <div>
             <div class="col">
-                <h1 class="h3 mb-3 font-weight-normal text-center">Welcome back!</h1>
+                <h1>Welcome back!</h1>
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}

@@ -53,6 +53,54 @@ body{
     font-weight: 600;
 }
 
+.container .row{
+    color: white;
+    padding: 30px;
+}
+.container .row img{
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+}
+
+form.container {
+    text-align: center;
+}
+
+form.container .col label{
+    text-align: left;
+}
+
+form.container div .col input{
+    font: 100%/1.4 Montserrat, Arial, sans-serif;
+    display: inline-block;
+    width: 94%;
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 30px;
+    background: #214b7d;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+form.container div.col button{
+    font: 100%/1.4 Montserrat, Arial, sans-serif;
+    padding: 10px;
+    background: #c63a25;
+    color: white;
+    border: 1px solid white;
+    border-radius: 25px;
+    width: 150px;
+    transition: all .5s ease;
+}
+
+form.container div.col button:hover{
+    background: #96b5dc;
+    color: black;
+    cursor: pointer;
+}
+
 @media (min-width: 992px){
     .wrapper {
         grid-template-columns: var(--sidebar-width) auto;
@@ -64,6 +112,32 @@ body{
         margin-right: auto;
         width: calc(100% - 40px);
     }
+
+
+    .container .row{
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        overflow-y: hidden;
+        padding: 200px;
+    }
+     .container .row img{
+         width: 300px;
+     }
+
+     form.container div .col label{
+         text-align: left;
+     }
+    form.container div .col input{
+        width: 95%;
+        padding: 10px;
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+
+
+
+
 }
 
 .content{
